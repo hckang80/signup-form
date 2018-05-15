@@ -21,7 +21,7 @@ class App implements m.ClassComponent<{}> {
     this.passwordConfirm = Form.Value("");
     this.userName = Form.Value("");
     this.phoneNumber = Form.Value("");
-    this.isInstagram = Form.Value("");
+    this.isInstagram = Form.Value("미보유");
     this.instagramAccount = Form.Value("");
 
     this.password.map(password => {
@@ -51,21 +51,24 @@ class App implements m.ClassComponent<{}> {
       this.password.isValid,
       this.passwordConfirm.isValid,
       this.userName.isValid,
-      this.phoneNumber.isValid
+      this.phoneNumber.isValid,
+      this.isInstagram.isValid
     ]).map(
       ([
         emailValid,
         passwordValid,
         passwordConfirmValid,
         userNameValid,
-        phoneNumberValid
+        phoneNumberValid,
+        isInstagramValid
       ]) => {
         return (
           emailValid &&
           passwordValid &&
           passwordConfirmValid &&
           userNameValid &&
-          phoneNumberValid
+          phoneNumberValid &&
+          isInstagramValid
         );
       }
     );
@@ -100,6 +103,12 @@ class App implements m.ClassComponent<{}> {
             value={this.phoneNumber}
             placeholder=""
           />
+          <Form.RadioButton
+            label="Instagram"
+            value={this.isInstagram}
+            radios={["미보유", "보유"]}
+            name="isInstagram"
+          />
           <Form.Submit label="Sign up" disabled={!this.isValid()} />
         </Form>
       </div>
@@ -108,7 +117,9 @@ class App implements m.ClassComponent<{}> {
 
   private onsubmit() {
     alert(
-      `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()} phone number=${this.phoneNumber()}`
+      `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()} phone number=${this.phoneNumber()} instagram=${
+        this.isInstagram
+      }`
     );
   }
 }
