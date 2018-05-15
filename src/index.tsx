@@ -21,7 +21,7 @@ class App implements m.ClassComponent<{}> {
     this.passwordConfirm = Form.Value("");
     this.userName = Form.Value("");
     this.phoneNumber = Form.Value("");
-    this.isInstagram = Form.Value("미보유");
+    this.isInstagram = Form.Value("");
     this.instagramAccount = Form.Value("");
 
     this.password.map(password => {
