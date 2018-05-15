@@ -46,13 +46,30 @@ class App implements m.ClassComponent<{}> {
       }
     );
 
+    this.isInstagram.map(isAccount => {
+      if (!this.instagramAccount() && isAccount === "보유") {
+        this.instagramAccount.error("Input a valid account");
+      } else {
+        this.instagramAccount.error(null);
+      }
+    });
+
+    this.instagramAccount.map(account => {
+      if (!account && this.isInstagram() === "보유") {
+        this.instagramAccount.error("Input a valid account");
+      } else {
+        this.instagramAccount.error(null);
+      }
+    });
+
     this.isValid = Stream.merge([
       this.email.isValid,
       this.password.isValid,
       this.passwordConfirm.isValid,
       this.userName.isValid,
       this.phoneNumber.isValid,
-      this.isInstagram.isValid
+      this.isInstagram.isValid,
+      this.instagramAccount.isValid
     ]).map(
       ([
         emailValid,
@@ -60,7 +77,8 @@ class App implements m.ClassComponent<{}> {
         passwordConfirmValid,
         userNameValid,
         phoneNumberValid,
-        isInstagramValid
+        isInstagramValid,
+        instagramAccountValid
       ]) => {
         return (
           emailValid &&
@@ -68,7 +86,8 @@ class App implements m.ClassComponent<{}> {
           passwordConfirmValid &&
           userNameValid &&
           phoneNumberValid &&
-          isInstagramValid
+          isInstagramValid &&
+          instagramAccountValid
         );
       }
     );
@@ -109,6 +128,13 @@ class App implements m.ClassComponent<{}> {
             radios={["미보유", "보유"]}
             name="isInstagram"
           />
+          {this.isInstagram() === "보유" && (
+            <Form.InstagramAccount
+              label="Instagram Account"
+              value={this.instagramAccount}
+              placeholder=""
+            />
+          )}
           <Form.Submit label="Sign up" disabled={!this.isValid()} />
         </Form>
       </div>
@@ -119,7 +145,7 @@ class App implements m.ClassComponent<{}> {
     alert(
       `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()} phone number=${this.phoneNumber()} instagram=${
         this.isInstagram
-      }`
+      } account=${this.instagramAccount()}`
     );
   }
 }
