@@ -6,15 +6,19 @@ let controlIdSeq = 1;
 export interface IBaseControl<T, U = T> {
   value: IValue<string>;
   label: string;
-  placeholder: string;
+  placeholder?: string;
+  radios?: string[];
+  name?: string;
 }
 
 class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
   implements m.ClassComponent<Attrs> {
   protected value: IValue<string>;
   private label: string;
-  public placeholder: string;
-  private controlId: string;
+  public placeholder;
+  public radios;
+  public name;
+  public controlId: string;
   // tslint:disable-next-line:variable-name
   private __attrs: Attrs;
 
@@ -22,6 +26,8 @@ class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
     this.value = attrs.value;
     this.label = attrs.label;
     this.placeholder = attrs.placeholder;
+    this.radios = attrs.radios;
+    this.name = attrs.name;
     this.controlId = `__control${controlIdSeq++}`;
   }
 
