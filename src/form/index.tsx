@@ -6,6 +6,7 @@ import Submit from "./Submit";
 import TextField from "./TextField";
 import PhoneField from "./PhoneField";
 import RadioButton from "./RadioButton";
+import InstagramAccount from "./InstagramAccount";
 import Value, { IValue } from "./Value";
 
 interface IForm {
@@ -19,6 +20,7 @@ class Form implements m.ClassComponent<IForm> {
   public static TextField = TextField;
   public static PhoneField = PhoneField;
   public static RadioButton = RadioButton;
+  public static InstagramAccount = InstagramAccount;
   public static Value = Value;
   // tslint:disable-next-line:variable-name
   private __attrs: IForm;
