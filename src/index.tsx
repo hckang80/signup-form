@@ -16,6 +16,14 @@ class App implements m.ClassComponent<{}> {
   private numberOfPhonesOwned: IValue<string>;
   private isValid: Stream.Stream<boolean>;
 
+  private isValidInstagram() {
+    if (!this.instagramAccount() && this.isInstagram() === "보유") {
+      this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
+    } else {
+      this.instagramAccount.error(null);
+    }
+  }
+
   public oninit() {
     this.email = Form.Value("");
     this.password = Form.Value("");
@@ -46,21 +54,9 @@ class App implements m.ClassComponent<{}> {
       }
     );
 
-    this.isInstagram.map(isAccount => {
-      if (!this.instagramAccount() && isAccount === "보유") {
-        this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
-      } else {
-        this.instagramAccount.error(null);
-      }
-    });
+    this.isInstagram.map(() => this.isValidInstagram());
 
-    this.instagramAccount.map(account => {
-      if (!account && this.isInstagram() === "보유") {
-        this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
-      } else {
-        this.instagramAccount.error(null);
-      }
-    });
+    this.instagramAccount.map(() => this.isValidInstagram());
 
     this.isValid = Stream.merge([
       this.email.isValid,
