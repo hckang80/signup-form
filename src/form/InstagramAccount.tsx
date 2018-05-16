@@ -15,18 +15,18 @@ class InstagramAccount extends BaseControl<IInstagramAccount, string> {
 
   protected controls() {
     return (
-      <div class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}>
-        <div class={cc("row")}>
-          <span class="col-sm-4">http://www.instagram.com/</span>
-          <span class="col-sm-8">
+      <div
+        class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}
+      >
+        <div class="form-inline">
+          http://www.instagram.com/ &nbsp;
           <input
             oninput={m.withAttr("value", value => this.oninput(value))}
             type="text"
-            class={cc("form-control")}
+            class="form-control"
             value={this.account}
             placeholder={this.placeholder}
           />
-          </span>
         </div>
       </div>
     );

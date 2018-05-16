@@ -30,13 +30,10 @@ class RadioButton extends BaseControl<IRadioButton, string> {
             name={this.name}
             type="radio"
             id={this.controlId + index}
-            class={cc("custom-control-input")}
+            class="custom-control-input"
             checked={radio.value + "" === this.value()}
           />
-          <label
-            class={cc("custom-control-label")}
-            for={this.controlId + index}
-          >
+          <label class="custom-control-label" for={this.controlId + index}>
             {radio.label}
           </label>
         </div>
