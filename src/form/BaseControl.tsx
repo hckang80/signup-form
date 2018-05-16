@@ -7,7 +7,7 @@ export interface IBaseControl<T, U = T> {
   value: IValue<string>;
   label: string;
   placeholder?: string;
-  radios?: string[];
+  radios?: { label: string; value: string | number }[];
   name?: string;
 }
 
