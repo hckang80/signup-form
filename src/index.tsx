@@ -19,6 +19,8 @@ class App implements m.ClassComponent<{}> {
   private isValidInstagram() {
     if (!this.instagramAccount() && this.isInstagram() === "보유") {
       this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
+    } else if (!/^[a-z]+[a-z0-9]/g.test(this.instagramAccount())) {
+      this.instagramAccount.error("형식이 올바르지 않습니다.");
     } else {
       this.instagramAccount.error(null);
     }
