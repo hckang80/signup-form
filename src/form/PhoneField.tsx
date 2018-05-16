@@ -6,16 +6,16 @@ import Value from "./Value";
 interface IPhoneField extends IBaseControl<string> {}
 
 class PhoneField extends BaseControl<IPhoneField, string> {
-  private phoneFormat: string;
+  private phoneValue: string;
 
   protected controls() {
     return (
       <input
         oninput={m.withAttr("value", value => {
           this.oninput(this.autoHypenPhone(value));
-          this.phoneFormat = this.autoHypenPhone(value);
+          this.phoneValue = this.autoHypenPhone(value);
         })}
-        value={this.phoneFormat}
+        value={this.phoneValue}
         type="tel"
         class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}
         placeholder={this.placeholder}
@@ -24,31 +24,13 @@ class PhoneField extends BaseControl<IPhoneField, string> {
     );
   }
 
-  private autoHypenPhone(number: string) {
-    number = number.replace(/[^0-9]/g, "");
-    var tmp = "";
-    if (number.length < 4) {
-      return number;
-    } else if (number.length < 7) {
-      tmp += number.substr(0, 3);
-      tmp += "-";
-      tmp += number.substr(3);
-      return tmp;
-    } else if (number.length < 11) {
-      tmp += number.substr(0, 3);
-      tmp += "-";
-      tmp += number.substr(3, 3);
-      tmp += "-";
-      tmp += number.substr(6);
-      return tmp;
-    } else {
-      tmp += number.substr(0, 3);
-      tmp += "-";
-      tmp += number.substr(3, 4);
-      tmp += "-";
-      tmp += number.substr(7);
-      return tmp;
-    }
+  private autoHypenPhone(phone: string) {
+    phone = phone.replace(/[^0-9]/g, "");
+    var phoneFormat = phone.replace(
+      /(^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,
+      "$1-$2-$3"
+    );
+    return phoneFormat;
   }
 
   private oninput(value: string) {

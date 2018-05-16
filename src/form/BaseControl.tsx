@@ -16,9 +16,9 @@ class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
   implements m.ClassComponent<Attrs> {
   protected value: IValue<string>;
   private label: string;
-  public placeholder;
+  public placeholder: string | undefined;
   public radios;
-  public name;
+  public name: string | undefined;
   public errorMsg;
   public controlId: string;
   // tslint:disable-next-line:variable-name

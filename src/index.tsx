@@ -109,7 +109,7 @@ class App implements m.ClassComponent<{}> {
           <Form.Password
             label="비밀번호"
             value={this.password}
-            placeholder="비밀번호를 입력하세요."
+            placeholder="대문자를 포함하여 비밀번호를 입력하세요."
           />
           <Form.Password
             label="비밀번호 확인"
@@ -124,7 +124,7 @@ class App implements m.ClassComponent<{}> {
           <Form.PhoneField
             label="휴대폰 번호"
             value={this.phoneNumber}
-            placeholder="01*-****-****"
+            placeholder="숫자만 입력하세요."
             errorMsg="휴대폰 번호 형식이 올바르지 않습니다."
           />
           <Form.RadioButton
@@ -139,7 +139,7 @@ class App implements m.ClassComponent<{}> {
           />
           {this.isInstagram() === "보유" && (
             <Form.InstagramAccount
-              label="Instagram Account"
+              label="인스타그램 계정"
               value={this.instagramAccount}
               placeholder="계정을 입력하세요."
             />
