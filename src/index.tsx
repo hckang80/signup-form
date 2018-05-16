@@ -13,6 +13,7 @@ class App implements m.ClassComponent<{}> {
   private phoneNumber: IValue<string>;
   private isInstagram: IValue<string>;
   private instagramAccount: IValue<string>;
+  private numberOfPhonesOwned: IValue<string>;
   private isValid: Stream.Stream<boolean>;
 
   public oninit() {
@@ -23,6 +24,7 @@ class App implements m.ClassComponent<{}> {
     this.phoneNumber = Form.Value("");
     this.isInstagram = Form.Value("");
     this.instagramAccount = Form.Value("");
+    this.numberOfPhonesOwned = Form.Value("0");
 
     this.password.map(password => {
       if (password.length < 6) {
@@ -69,7 +71,8 @@ class App implements m.ClassComponent<{}> {
       this.userName.isValid,
       this.phoneNumber.isValid,
       this.isInstagram.isValid,
-      this.instagramAccount.isValid
+      this.instagramAccount.isValid,
+      this.numberOfPhonesOwned.isValid
     ]).map(
       ([
         emailValid,
@@ -78,7 +81,8 @@ class App implements m.ClassComponent<{}> {
         userNameValid,
         phoneNumberValid,
         isInstagramValid,
-        instagramAccountValid
+        instagramAccountValid,
+        numberOfPhonesOwnedValid
       ]) => {
         return (
           emailValid &&
@@ -87,7 +91,8 @@ class App implements m.ClassComponent<{}> {
           userNameValid &&
           phoneNumberValid &&
           isInstagramValid &&
-          instagramAccountValid
+          instagramAccountValid &&
+          numberOfPhonesOwnedValid
         );
       }
     );
@@ -125,7 +130,10 @@ class App implements m.ClassComponent<{}> {
           <Form.RadioButton
             label="Instagram"
             value={this.isInstagram}
-            radios={["미보유", "보유"]}
+            radios={[
+              { label: "미보유", value: "미보유" },
+              { label: "보유", value: "보유" }
+            ]}
             name="isInstagram"
           />
           {this.isInstagram() === "보유" && (
@@ -135,6 +143,19 @@ class App implements m.ClassComponent<{}> {
               placeholder=""
             />
           )}
+          <Form.RadioButton
+            label="Number of phones owned"
+            value={this.numberOfPhonesOwned}
+            radios={[
+              { label: "0", value: 0 },
+              { label: "1", value: 1 },
+              { label: "2", value: 2 },
+              { label: "3", value: 3 },
+              { label: "4", value: 4 },
+              { label: "5개 이상", value: 5 }
+            ]}
+            name="numberOfPhonesOwned"
+          />
           <Form.Submit label="Sign up" disabled={!this.isValid()} />
         </Form>
       </div>
@@ -143,9 +164,14 @@ class App implements m.ClassComponent<{}> {
 
   private onsubmit() {
     alert(
-      `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()} phone number=${this.phoneNumber()} instagram=${
-        this.isInstagram
-      } account=${this.instagramAccount()}`
+      `sign up with
+        email=${this.email()}
+        password=${this.password()}
+        user name=${this.userName()}
+        phone=${this.phoneNumber()}
+        instagram=${this.isInstagram()}
+        account=${this.instagramAccount()}
+        phones owned=${this.numberOfPhonesOwned()}`
     );
   }
 }
