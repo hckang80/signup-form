@@ -12,7 +12,7 @@ class RadioButton extends BaseControl<IRadioButton, string> {
   }
 
   protected controls() {
-    return this.radios.map((label, index) => {
+    return this.radios.map((radio, index) => {
       return (
         <div
           class={cc([
@@ -26,18 +26,18 @@ class RadioButton extends BaseControl<IRadioButton, string> {
             onchange={m.withAttr("value", value => {
               this.onchange(value);
             })}
-            value={label}
+            value={radio.value}
             name={this.name}
             type="radio"
             id={this.controlId + index}
             class={cc("custom-control-input")}
-            checked={label === this.value()}
+            checked={radio.value + "" === this.value()}
           />
           <label
             class={cc("custom-control-label")}
             for={this.controlId + index}
           >
-            {label}
+            {radio.label}
           </label>
         </div>
       );
