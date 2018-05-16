@@ -24,6 +24,7 @@ class InstagramAccount extends BaseControl<IInstagramAccount, string> {
             type="text"
             class={cc("form-control")}
             value={this.account}
+            placeholder={this.placeholder}
           />
           </span>
         </div>

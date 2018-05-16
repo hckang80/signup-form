@@ -28,11 +28,9 @@ class App implements m.ClassComponent<{}> {
 
     this.password.map(password => {
       if (password.length < 6) {
-        this.password.error("password must be at least 6 characters");
+        this.password.error("비밀번호는 6자 이상이어야 합니다.");
       } else if (!/[A-Z]/.test(password)) {
-        this.password.error(
-          "password must contain 1 or more uppercase characters"
-        );
+        this.password.error("비밀번호는 하나 이상의 대문자를 포함해야 합니다.");
       } else {
         this.password.error(null);
       }
@@ -41,7 +39,7 @@ class App implements m.ClassComponent<{}> {
     Stream.merge([this.password, this.passwordConfirm]).map(
       ([password, passwordConfirm]) => {
         if (password !== passwordConfirm) {
-          this.passwordConfirm.error("password confirm must equal to password");
+          this.passwordConfirm.error("비밀번호와 동일하게 입력해 주세요.");
         } else {
           this.passwordConfirm.error(null);
         }
@@ -50,7 +48,7 @@ class App implements m.ClassComponent<{}> {
 
     this.isInstagram.map(isAccount => {
       if (!this.instagramAccount() && isAccount === "보유") {
-        this.instagramAccount.error("Input a valid account");
+        this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
       } else {
         this.instagramAccount.error(null);
       }
@@ -58,7 +56,7 @@ class App implements m.ClassComponent<{}> {
 
     this.instagramAccount.map(account => {
       if (!account && this.isInstagram() === "보유") {
-        this.instagramAccount.error("Input a valid account");
+        this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
       } else {
         this.instagramAccount.error(null);
       }
@@ -103,48 +101,51 @@ class App implements m.ClassComponent<{}> {
       <div class="container">
         <Form onsubmit={() => this.onsubmit()}>
           <Form.Email
-            label="Email"
+            label="이메일"
             value={this.email}
             placeholder="example@croquis.com"
+            errorMsg="이메일이 입력되지 않았거나 형식이 올바르지 않습니다."
           />
           <Form.Password
-            label="Password"
+            label="비밀번호"
             value={this.password}
-            placeholder=""
+            placeholder="비밀번호를 입력하세요."
           />
           <Form.Password
-            label="Confirm Password"
+            label="비밀번호 확인"
             value={this.passwordConfirm}
-            placeholder=""
+            placeholder="비밀번호와 동일하게 입력하세요."
           />
           <Form.TextField
-            label="User Name"
+            label="이름"
             value={this.userName}
-            placeholder=""
+            placeholder="이름을 입력하세요."
           />
           <Form.PhoneField
-            label="Phone"
+            label="휴대폰 번호"
             value={this.phoneNumber}
-            placeholder=""
+            placeholder="01*-****-****"
+            errorMsg="휴대폰 번호 형식이 올바르지 않습니다."
           />
           <Form.RadioButton
-            label="Instagram"
+            label="인스타그램 소유 여부"
             value={this.isInstagram}
             radios={[
               { label: "미보유", value: "미보유" },
               { label: "보유", value: "보유" }
             ]}
             name="isInstagram"
+            errorMsg="인스타그램 보유 여부를 선택해주세요."
           />
           {this.isInstagram() === "보유" && (
             <Form.InstagramAccount
               label="Instagram Account"
               value={this.instagramAccount}
-              placeholder=""
+              placeholder="계정을 입력하세요."
             />
           )}
           <Form.RadioButton
-            label="Number of phones owned"
+            label="소유한 핸드폰 개수"
             value={this.numberOfPhonesOwned}
             radios={[
               { label: "0", value: 0 },

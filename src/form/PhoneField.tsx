@@ -59,7 +59,7 @@ class PhoneField extends BaseControl<IPhoneField, string> {
     ) {
       this.value.error(null);
     } else {
-      this.value.error("Input a valid phone number");
+      this.value.error(this.errorMsg);
     }
   }
 }

@@ -49,7 +49,7 @@ class RadioButton extends BaseControl<IRadioButton, string> {
     if (value) {
       this.value.error(null);
     } else {
-      this.value.error("Please select whether you have Instagram or not.");
+      this.value.error(this.errorMsg);
     }
   }
 }

@@ -12,6 +12,7 @@ class Password extends BaseControl<IPassword, string> {
         oninput={m.withAttr("value", this.value)}
         type="password"
         class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}
+        placeholder={this.placeholder}
       />
     );
   }

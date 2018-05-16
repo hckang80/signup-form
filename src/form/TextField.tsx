@@ -12,6 +12,7 @@ class TextField extends BaseControl<ITextField, string> {
         oninput={m.withAttr("value", this.value)}
         type="text"
         class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}
+        placeholder={this.placeholder}
       />
     );
   }

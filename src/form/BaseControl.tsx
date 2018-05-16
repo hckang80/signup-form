@@ -9,6 +9,7 @@ export interface IBaseControl<T, U = T> {
   placeholder?: string;
   radios?: { label: string; value: string | number }[];
   name?: string;
+  errorMsg?: string;
 }
 
 class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
@@ -18,6 +19,7 @@ class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
   public placeholder;
   public radios;
   public name;
+  public errorMsg;
   public controlId: string;
   // tslint:disable-next-line:variable-name
   private __attrs: Attrs;
@@ -28,6 +30,7 @@ class BaseControl<Attrs extends IBaseControl<T, U>, T, U = T>
     this.placeholder = attrs.placeholder;
     this.radios = attrs.radios;
     this.name = attrs.name;
+    this.errorMsg = attrs.errorMsg;
     this.controlId = `__control${controlIdSeq++}`;
   }
 
