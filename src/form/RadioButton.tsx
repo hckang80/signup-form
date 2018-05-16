@@ -43,10 +43,9 @@ class RadioButton extends BaseControl<IRadioButton, string> {
 
   private onchange(value: string) {
     this.value(value);
+    this.value.error(this.errorMsg);
     if (value) {
       this.value.error(null);
-    } else {
-      this.value.error(this.errorMsg);
     }
   }
 }

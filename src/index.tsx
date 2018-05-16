@@ -17,12 +17,13 @@ class App implements m.ClassComponent<{}> {
   private isValid: Stream.Stream<boolean>;
 
   private isValidInstagram() {
-    if (!this.instagramAccount() && this.isInstagram() === "보유") {
-      this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
-    } else if (!/^[a-z]+[a-z0-9]/g.test(this.instagramAccount())) {
-      this.instagramAccount.error("형식이 올바르지 않습니다.");
-    } else {
-      this.instagramAccount.error(null);
+    this.instagramAccount.error(null);
+    if (this.isInstagram() === "보유") {
+      if (!this.instagramAccount()) {
+        this.instagramAccount.error("인스타그램 계정을 반드시 입력해 주세요.");
+      } else if (!/^[a-z]+[a-z0-9]/g.test(this.instagramAccount())) {
+        this.instagramAccount.error("형식이 올바르지 않습니다.");
+      }
     }
   }
 
@@ -37,21 +38,19 @@ class App implements m.ClassComponent<{}> {
     this.numberOfPhonesOwned = Form.Value("0");
 
     this.password.map(password => {
+      this.password.error(null);
       if (password.length < 6) {
         this.password.error("비밀번호는 6자 이상이어야 합니다.");
       } else if (!/[A-Z]/.test(password)) {
         this.password.error("비밀번호는 하나 이상의 대문자를 포함해야 합니다.");
-      } else {
-        this.password.error(null);
       }
     });
 
     Stream.merge([this.password, this.passwordConfirm]).map(
       ([password, passwordConfirm]) => {
+        this.passwordConfirm.error(null);
         if (password !== passwordConfirm) {
           this.passwordConfirm.error("비밀번호와 동일하게 입력해 주세요.");
-        } else {
-          this.passwordConfirm.error(null);
         }
       }
     );

@@ -24,10 +24,9 @@ class Email extends BaseControl<IEmail, string> {
 
   private oninput(value: string) {
     this.value(value);
+    this.value.error(this.errorMsg);
     if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
       this.value.error(null);
-    } else {
-      this.value.error(this.errorMsg);
     }
   }
 }
