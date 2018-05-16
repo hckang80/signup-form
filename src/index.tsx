@@ -105,12 +105,12 @@ class App implements m.ClassComponent<{}> {
           <Form.Password
             label="비밀번호"
             value={this.password}
-            placeholder="대문자를 포함하여 비밀번호를 입력하세요."
+            placeholder="대문자를 포함한 형식으로 입력하세요."
           />
           <Form.Password
             label="비밀번호 확인"
             value={this.passwordConfirm}
-            placeholder="비밀번호와 동일하게 입력하세요."
+            placeholder="비밀번호를 확인하세요."
           />
           <Form.TextField
             label="이름"
