@@ -22,7 +22,7 @@ class Email extends BaseControl<IEmail, string> {
     );
   }
 
-  private oninput(value) {
+  private oninput(value: string) {
     this.value(value);
     if (/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)) {
       this.value.error(null);
