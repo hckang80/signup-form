@@ -4,6 +4,7 @@ import Email from "./Email";
 import Password from "./Password";
 import Submit from "./Submit";
 import TextField from "./TextField";
+import PhoneField from "./PhoneField";
 import Value, { IValue } from "./Value";
 
 interface IForm {
@@ -15,6 +16,7 @@ class Form implements m.ClassComponent<IForm> {
   public static Password = Password;
   public static Submit = Submit;
   public static TextField = TextField;
+  public static PhoneField = PhoneField;
   public static Value = Value;
   // tslint:disable-next-line:variable-name
   private __attrs: IForm;

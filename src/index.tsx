@@ -95,6 +95,11 @@ class App implements m.ClassComponent<{}> {
             value={this.userName}
             placeholder=""
           />
+          <Form.PhoneField
+            label="Phone"
+            value={this.phoneNumber}
+            placeholder=""
+          />
           <Form.Submit label="Sign up" disabled={!this.isValid()} />
         </Form>
       </div>
@@ -103,7 +108,7 @@ class App implements m.ClassComponent<{}> {
 
   private onsubmit() {
     alert(
-      `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()}}`
+      `sign up with email=${this.email()} password=${this.password()} user name=${this.userName()} phone number=${this.phoneNumber()}`
     );
   }
 }
