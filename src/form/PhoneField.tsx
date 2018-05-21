@@ -6,18 +6,52 @@ import Value from "./Value";
 interface IPhoneField extends IBaseControl<string> {}
 
 class PhoneField extends BaseControl<IPhoneField, string> {
+  private phoneFormat: string;
+
   protected controls() {
     return (
       <input
-        oninput={m.withAttr("value", value => this.oninput(value))}
+        oninput={m.withAttr("value", value => {
+          this.oninput(this.autoHypenPhone(value));
+          this.phoneFormat = this.autoHypenPhone(value);
+        })}
+        value={this.phoneFormat}
         type="tel"
         class={cc(["form-control", { "is-invalid": !this.value.isValid() }])}
         placeholder={this.placeholder}
+        maxlength="13"
       />
     );
   }
 
-  private oninput(value) {
+  private autoHypenPhone(number: string) {
+    number = number.replace(/[^0-9]/g, "");
+    var tmp = "";
+    if (number.length < 4) {
+      return number;
+    } else if (number.length < 7) {
+      tmp += number.substr(0, 3);
+      tmp += "-";
+      tmp += number.substr(3);
+      return tmp;
+    } else if (number.length < 11) {
+      tmp += number.substr(0, 3);
+      tmp += "-";
+      tmp += number.substr(3, 3);
+      tmp += "-";
+      tmp += number.substr(6);
+      return tmp;
+    } else {
+      tmp += number.substr(0, 3);
+      tmp += "-";
+      tmp += number.substr(3, 4);
+      tmp += "-";
+      tmp += number.substr(7);
+      return tmp;
+    }
+  }
+
+  private oninput(value: string) {
     this.value(value);
     if (
       !value ||
